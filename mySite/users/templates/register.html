@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{
+    --main-color:#04d908;
+    --color-dark:#1D2231;
+    --color-grey:#8390A2;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    /* font-family: 'Poppins',sans-serif; */
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f1f5f9;
+}
+
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 550px;
+    background-color: #fff;
+    padding: 3em 2.5em;
+    border-radius: 20px;
+    box-shadow: 0.5px 4px 9px 1px var(--color-grey);
+    justify-content: space-between;
+
+}
+.tag{
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+.text{
+    color: var(--color-dark);
+    font-weight: 600;
+    font-size: 16px;
+}
+ .details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.input{
+        
+ border: 0.5px solid var(--color-grey);
+    padding: .35rem;
+    border-radius: 5px;
+}
+
+input:focus{
+    outline: none !important;
+    border: 2px solid var(--main-color);
+    padding: 0.32rem;
+}
+
+.create{
+    width: 100%;
+    padding: 0.3rem 0.3rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    background-color:var(--main-color) ;
+    color: #fff;
+}
+.create:hover{
+    background-color:#51e954 ;
+    color: #eefaeb;
+}
+
+
+h4 a{
+    color: var(--main-color);
+}
+h4 a:hover{
+    color:#51e954  ;
+}
+
+.terms{
+    display: flex;
+    flex-direction: row;
+}
+.login{
+    display: flex;
+    flex-direction: row;
+}
+
+.check{
+    margin-right: 5px;
+    
+}
+
+.email{
+    border: 1px solid var(--main-color);
+    height: 40px;
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <div class="card">
+            <h1 class="tag">Create an account</h1>
+            <div class="details">
+                <label for="email">
+                <h4 class="text">Your email</h4>
+            </label>
+            <div class="email">
+                {{form.email}}
+            </div>
+            </div>
+            <div class="details">
+                <label for="user">
+                <h4 class="text">User name</h4>
+            </label>
+            <div class="user">
+                {{form.username}}
+            </div>
+            </div>
+            <div class="details">
+                <label for="password">
+                <h4 class="text">Password</h4>
+            </label>
+            <div class="password">
+                {{form.password1}}
+            </div>
+            </div>
+            <div class="details">
+                <label for="cnc-pass">
+                <h4 class="text">Confirm password</h4>
+            </label>
+            <div class="cnc-pass">
+                {{form.password2}}
+            </div>
+            </div>
+            <div class="terms">
+                <input type="checkbox" class="check">
+                <h4 class="text">I accept the <a href="#terms">Terms and Conditions</a></h4>
+            </div>
+            <button class="create">
+                Create an account
+            </button>
+            <div class="login" >
+                <h4 class="text">Already have an account? <a href={% url 'login' %}>Login here</a></h4>
+            </div>
+        </div>
+    </form>
+</body>
+</html> 
+
