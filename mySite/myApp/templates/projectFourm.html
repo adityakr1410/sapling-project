@@ -9,24 +9,25 @@
         <h2 class="tag">Enter the project details </h2>
         <div class="reg">
             <h4 class="text">Registration No.</h4>
-            <input type="text" id="reg">
+            <input type="text" id="reg" name="reg">
         </div>
         <div class="name-project">
             <h4 class="text">Name of project</h4>
-            <input type="text" id="name">
+            <input type="text" id="name" name="name">
         </div>
         <div class="latitude-longitude">
             <h4 class="text">Enter latitude and longitude</h4>
             <div class="latitude-longitude-inputs">
-                <input type="text" id="lat">
-                <input type="text" id="long">
+                <input type="text" id="lat" name="lat">
+                <input type="text" id="long" name="long">
             </div>
         </div>
         <div class="project-select">
             <h4 class="text">Owner's Name</h4>
             <select name="owners" id="owners">
+                <option value=""></option>
                 {% for p in users %}
-                <option value="">{{p.username}}</option>
+                <option value="{{p.username}}">{{p.username}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -42,13 +43,7 @@
         <div class="caretaker-name">
             <h4 class="text">Caretaker's Name</h4>
             <div class="data-input">
-
-            </div>
-        </div>
-        <div class="caretaker-num">
-            <h4 class="text">Caretaker's Number</h4>
-            <div class="data-input">
-
+                <input type="text" id="cTaker" name="cTaker">
             </div>
         </div>
 

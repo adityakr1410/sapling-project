@@ -27,8 +27,9 @@ def addProject(request):
         lat = request.POST.get('lat')
         long = request.POST.get('long')
         owner = request.POST.get('owners')
-        print(reg)
-        print("hello world")
+        cTaker = request.POST.get('cTaker')
+        proj = project(reg=reg,name=nameOfProject,longitude=long,latitude=lat,ownerUsername=owner,careTakerDetails=cTaker)
+        proj.save()
         return redirect('/')    
     
     else:
