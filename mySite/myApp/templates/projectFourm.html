@@ -3,44 +3,39 @@
 
 
 {% block content %}
+<form method="POST">
+    {% csrf_token %}
     <div class="card">
         <h2 class="tag">Enter the project details </h2>
         <div class="reg">
             <h4 class="text">Registration No.</h4>
-            <div class="data-input">
-
-            </div>
+            <input type="text" id="reg">
         </div>
         <div class="name-project">
             <h4 class="text">Name of project</h4>
-            <div class="data-input">
-
-            </div>
+            <input type="text" id="name">
         </div>
         <div class="latitude-longitude">
             <h4 class="text">Enter latitude and longitude</h4>
             <div class="latitude-longitude-inputs">
-                <div class="data-input">
-
-                </div>
-                <div class="data-input">
-
-                </div>
+                <input type="text" id="lat">
+                <input type="text" id="long">
             </div>
         </div>
-        <div class="owner-name">
+        <div class="project-select">
             <h4 class="text">Owner's Name</h4>
-            <div class="data-input">
-
-            </div>
+            <select name="owners" id="owners">
+                {% for p in users %}
+                <option value="">{{p.username}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="project-select">
             <label for="projects">Choose a project:</label>
             <select name="projects" id="projects">
-                <option value="">program 1</option>
-                <option value="">program 2</option>
-                <option value="">program 3</option>
-
+                {% for user in names %}
+                <option value="">{{user.name}}</option>
+                {% endfor %}
             </select>
         </div>
         <h2 class="tag">Caretaker's details </h2>
@@ -61,7 +56,6 @@
             Submit
         </button>
     </div>
-
-
+</form>
 
 {% endblock  %}
