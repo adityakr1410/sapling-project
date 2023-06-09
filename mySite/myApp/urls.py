@@ -7,5 +7,6 @@ urlpatterns = [
    path('',home,name='home'),
    path('prn/',prn,name='prn'),
    path('addProject/',addProject,name='addProject'),
+   path('viewProject/',viewProject,name='viewProject'),
    
 ]

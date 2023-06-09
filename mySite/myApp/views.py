@@ -43,3 +43,19 @@ def addProject(request):
         print(data["users"])
         return render(request,'projectFourm.html',data)
     
+def viewProject(request):
+    
+    if request.method == 'POST':
+        
+        
+        
+        return redirect('/')
+    
+    else:
+        
+        proj = project.objects.all()
+        context = {
+            "project":proj
+        }
+        return render(request,'allProjects.html',context)
+    
