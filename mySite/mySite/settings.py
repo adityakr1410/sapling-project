@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'folium',
     'users',
     'myApp',
     'django.contrib.admin',

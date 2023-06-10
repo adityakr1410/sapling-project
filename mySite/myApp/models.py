@@ -10,10 +10,11 @@ class project(models.Model):
     
     reg=models.IntegerField()
     name=models.CharField(max_length=30)
-    longitude=models.CharField(max_length=40)
-    latitude=models.CharField(max_length=40)
-    ownerUsername=models.CharField(max_length=40)
-    careTakerDetails=models.CharField(max_length=200)
+    lat=models.CharField(max_length=40)
+    long=models.CharField(max_length=40)
+    zoomIn=models.IntegerField(default=12)
+    owner=models.CharField(max_length=40)
+    careT=models.CharField(max_length=200)
     
 class plant(models.Model):
     

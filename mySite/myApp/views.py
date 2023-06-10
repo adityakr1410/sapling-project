@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import get_user_model
 from .models import *
+
+import folium 
+
 # Create your views here.
 
 
@@ -26,9 +29,11 @@ def addProject(request):
         reg = request.POST.get('reg')
         lat = request.POST.get('lat')
         long = request.POST.get('long')
+        zoomIn = request.POST.get('zoom')
         owner = request.POST.get('owners')
         cTaker = request.POST.get('cTaker')
-        proj = project(reg=reg,name=nameOfProject,longitude=long,latitude=lat,ownerUsername=owner,careTakerDetails=cTaker)
+        
+        proj = project(reg=reg,name=nameOfProject,lat=lat,long=long,zoomIn=zoomIn,owner=owner,careT=cTaker)
         proj.save()
         return redirect('/')    
     
@@ -43,19 +48,27 @@ def addProject(request):
         print(data["users"])
         return render(request,'projectFourm.html',data)
     
-def viewProject(request):
+def allProjects(request):
     
-    if request.method == 'POST':
-        
-        
-        
-        return redirect('/')
+    proj = project.objects.all()
+    context = {
+        "project":proj
+    }
+    return render(request,'allProjects.html',context)
     
-    else:
-        
-        proj = project.objects.all()
-        context = {
-            "project":proj
-        }
-        return render(request,'allProjects.html',context)
+
+def viewProject(request,id):
+    
+    proj = project.objects.get(reg=id)
+    
+    m = folium.Map(location=[proj.lat,proj.long], zoom_start=proj.zoomIn)
+    cord = (proj.lat,proj.long)
+    folium.Marker(cord,popup=proj.name).add_to(m)
+    
+    plnt = plant.objects.filter(parentProject=id)
+    context = {
+        "plant":plnt,
+        "map":m._repr_html_()
+    }
+    return render(request,'projectView.html',context)
     

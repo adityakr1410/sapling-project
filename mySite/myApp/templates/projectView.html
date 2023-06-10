@@ -4,57 +4,47 @@
 {% block content %}
 
 
+    {{map|safe}}
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                Our Projects
+                All plants in the project
             </caption>
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Reg no.
+                        ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Name
+                        Status
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Location
+                        Last checked
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Owner
+                        Type and details
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Caretaker
-                    </th>
-                </tr>
             </thead>
             <tbody>
 
-                {% for p in project %}
-                
+                {% for p in plant %}
+
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <a href={% url 'viewProject' p.reg %}>
-                        {{p.reg}}
-                        </a>
+                        {{p.plantID}}
                     </th>
-                
                     <td class="px-6 py-4">
-                        {{p.name}}
+                        {{p.plantStatus}}
                     </td>
                     <td class="px-6 py-4">
-                        {{p.lat}} , {{p.long}}
+                        {{p.lastChecked}}
                     </td>
                     <td class="px-6 py-4">
-                        {{p.owner}}
+                        {{p.typeDetails}}
                     </td>
-                    <td class="px-6 py-4">
-                        {{p.careT}}
-                    </td>
-                
+                    
                 </tr>
-                
                 
                 {% endfor %}
 

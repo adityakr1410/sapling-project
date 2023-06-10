@@ -22,6 +22,13 @@
                 <input type="text" id="long" name="long">
             </div>
         </div>
+        <h2 class="tag">Caretaker's details </h2>
+        <div class="caretaker-name">
+            <h4 class="text">Zoom in (To be zoomed in when map opens . can be left empty)</h4>
+            <div class="data-input">
+                <input type="text" id="zoom" name="zoom">
+            </div>
+        </div>
         <div class="project-select">
             <h4 class="text">Owner's Name</h4>
             <select name="owners" id="owners">
@@ -31,14 +38,7 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="project-select">
-            <label for="projects">Choose a project:</label>
-            <select name="projects" id="projects">
-                {% for user in names %}
-                <option value="">{{user.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
+        
         <h2 class="tag">Caretaker's details </h2>
         <div class="caretaker-name">
             <h4 class="text">Caretaker's Name</h4>
