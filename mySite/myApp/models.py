@@ -22,8 +22,14 @@ class plant(models.Model):
         return (str)(self.plantID)
 
     plantID=models.IntegerField()
-    plantStatus=models.CharField(max_length=30)
+    parentProject=models.IntegerField()
     lastChecked=models.CharField(max_length=200)
     typeDetails=models.CharField(max_length=200)
-    parentProject=models.IntegerField()
+    plantStatus=models.CharField(max_length=30)
+    healthDetails=models.CharField(max_length=400)
+    lat=models.CharField(max_length=40)
+    long=models.CharField(max_length=40)
+    
+    
+    
     

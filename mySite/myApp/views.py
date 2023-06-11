@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .models import *
 
 import folium 
+from folium.plugins import MarkerCluster
 
 # Create your views here.
 
@@ -48,6 +49,34 @@ def addProject(request):
         print(data["users"])
         return render(request,'projectFourm.html',data)
     
+def addPlant(request):
+    
+    if request.method == 'POST':
+        lat_long = request.POST.get('lat_long')
+        lat_long = lat_long.split(",")
+        proj = project.objects.get(name=request.POST.get('project'))
+        reg = request.POST.get('reg')
+        projID = proj.reg
+        lat = lat_long[0]
+        long = lat_long[1]
+        lDate = request.POST.get('lstCheck')
+        pStatus = request.POST.get('pStatus')
+        pType = request.POST.get('type')
+        hDetails = request.POST.get('detail')
+        
+        plnt = plant(plantID=reg,parentProject=projID,
+                     lastChecked=lDate,typeDetails=pType,
+                     plantStatus=pStatus,healthDetails=hDetails,lat=lat,long=long)
+        plnt.save()
+        return redirect('/')
+    
+    else:
+        proj = project.objects.all()
+        context = {
+            "projects":proj
+        }
+        return render(request,'plantForum.html',context)
+    
 def allProjects(request):
     
     proj = project.objects.all()
@@ -60,10 +89,28 @@ def allProjects(request):
 def viewProject(request,id):
     
     proj = project.objects.get(reg=id)
+    plnts = plant.objects.filter(parentProject=id)
     
     m = folium.Map(location=[proj.lat,proj.long], zoom_start=proj.zoomIn)
-    cord = (proj.lat,proj.long)
-    folium.Marker(cord,popup=proj.name).add_to(m)
+    
+    marker_cluster = MarkerCluster().add_to(m)
+    
+    for plnt in plnts:
+        folium.Marker(
+            location=[plnt.lat,plnt.long],
+            popup=plnt.typeDetails+"\nas of- "+plnt.lastChecked,
+            icon=folium.Icon(color=plnt.plantStatus,prefix=""),
+        ).add_to(marker_cluster)
+    
+    
+    
+    # lats = [pln.lat for pln in plnts]
+    # longs = [pln.long for pln in plnts] 
+    
+    # FastMarkerCluster(data=list(zip(lats,longs))).add_to(m)
+    
+    # cord = (proj.lat,proj.long)
+    # folium.Marker(cord,popup=proj.name).add_to(m)
     
     plnt = plant.objects.filter(parentProject=id)
     context = {

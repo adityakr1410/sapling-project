@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block style %}
-
 <style>
     :root {
         --main-color: #04d908;
@@ -111,6 +110,10 @@
         border: 2px solid var(--main-color);
         padding: 0.18rem;
     }
+    .status{
+        display:flex;
+        justify-content: space-around;
+    }
 </style>
 
 {% endblock  %}
@@ -120,45 +123,56 @@
 <form method="POST">
     {% csrf_token %}
     <div class="card">
-        <h2 class="tag">Enter the project details </h2>
+        <h2 class="tag">Enter the plant details </h2>
         <div class="reg">
             <h4 class="text">Registration No.</h4>
             <input type="text" id="reg" name="reg">
         </div>
-        <div class="name-project">
-            <h4 class="text">Name of project</h4>
-            <input type="text" id="name" name="name">
-        </div>
-        <div class="latitude-longitude">
-            <h4 class="text">Enter latitude and longitude</h4>
-            <div class="latitude-longitude-inputs">
-                <input type="text" id="lat" name="lat">
-                <input type="text" id="long" name="long">
-            </div>
-        </div>
-        <div class="caretaker-name">
-            <h4 class="text">Zoom in (To be zoomed in when map opens . can be left empty)</h4>
-            <div >
-                <input type="text" id="zoom" name="zoom">
-            </div>
-        </div>
         <div class="project-select">
-            <h4 class="text">Owner's Name</h4>
-            <select name="owners" id="owners">
+            <h4 class="text">Project name</h4>
+            <select name="project" id="project">
                 <option value=""></option>
-                {% for p in users %}
-                <option value="{{p.username}}">{{p.username}}</option>
+                {% for p in projects %}
+                <option value="{{p.name}}">{{p.name}}</option>
                 {% endfor %}
             </select>
         </div>
-        
-        <h2 class="tag">Caretaker's details </h2>
-        <div class="caretaker-name">
-            <h4 class="text">Caretaker's Name</h4>
-            <div class="data-input">
-                <input type="text" id="cTaker" name="cTaker">
+        <div class="latitude-longitude">
+            <h4 class="text">Enter latitude , longitude</h4>
+            <div class="latitude-longitude-inputs">
+                <input type="text" id="lat_long" name="lat_long">
             </div>
         </div>
+
+        
+
+        <div class="status">
+           
+            <div >
+                <h4 class="text">Last checked Date</h4>
+                <input type="date" id="lstCheck" name="lstCheck"
+                    value="2023-05-22"
+                    min="2021-05-22" max="2023-05-30">
+            </div>
+            <div >
+                <h4 class="text">Plant health</h4>
+                <select name="pStatus" id="pStatus">
+                    <option value=""></option>
+                    <option value="red">Red</option>
+                    <option value="orange">Oragne</option>
+                    <option value="green">Green</option>
+                </select>
+            </div>
+        </div>    
+        <div class="reg">
+            <h4 class="text">Type details</h4>
+            <input type="text" id="type" name="type">
+        </div>
+        <div class="reg">
+            <h4 class="text">Health details</h4>
+            <input type="text" id="detail" name="detail">
+        </div>
+
 
         <button type="submit" id="button">
             Submit
