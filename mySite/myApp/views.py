@@ -118,4 +118,28 @@ def viewProject(request,id):
         "map":m._repr_html_()
     }
     return render(request,'projectView.html',context)
+
+
+
+def viewDashboard(request):
+    user = get_user_model()
+    usernames = user.objects.all()
+    proj = project.objects.all()
+    plnt = plant.objects.all()
+    
+    
+    plants = len(plnt)
+    projects = len(proj)
+    volunteers = len(usernames)
+    
+    
+    context ={
+        'plants':plants,
+        'projects':projects,
+        'volunteers':volunteers,
+        'user':usernames,
+        'proj':proj
+    }
+    
+    return render(request,'dashboard.html', context)
     

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+            <div
+                class="grid grid-cols-4 gap-8 m-4 mt-28 max-[1200px]:grid-cols-2 max-[1430px]:grid-cols-3  max-[650px]:grid-cols-1">
+                <div class="flex justify-between bg-white p-8 rounded-md">
+                    <div>
+                        <h1 class="text-4xl font-semibold mb-2">{{volunteers}}</h1>
+                        <span class="text-[#8390A2] text-lg font-normal">Volunteers</span>
+                    </div>
+                    <i class="las la-hands-helping text-6xl text-[#04d908]"></i>
+                </div>
+                <div class="flex justify-between bg-white p-8 rounded-md">
+                    <div>
+                        <h1 class="text-4xl font-semibold mb-2">{{projects}}</h1>
+                        <span class="text-[#8390A2] text-lg font-normal">Projects</span>
+                    </div>
+                    <i class="las la-clipboard-list text-6xl text-[#04d908]"></i>
+                </div>
+                <div class="flex justify-between bg-white p-8 rounded-md">
+                    <div>
+                        <h1 class="text-4xl font-semibold mb-2">$5K</h1>
+                        <span class="text-[#8390A2] text-lg font-normal">Donations</span>
+                    </div>
+                    <i class="lab la-google-wallet text-6xl text-[#04d908]"></i>
+                </div>
+                <div class="flex justify-between bg-[#04d908] p-8 rounded-md">
+                    <div>
+                        <h1 class="text-4xl text-white font-semibold mb-2">{{plants}}</h1>
+                        <span class="text-white text-lg font-normal">Sapplings Planted</span>
+                    </div>
+                    <svg class="text-6xl text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
+                        viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path fill="none" d="M0 0H24V24H0z"></path>
+                            <path
+                                d="M6 2c2.69 0 5.024 1.517 6.197 3.741C13.374 4.083 15.31 3 17.5 3H21v2.5c0 3.59-2.91 6.5-6.5 6.5H13v1h5v7c0 1.105-.895 2-2 2H8c-1.105 0-2-.895-2-2v-7h5v-2H9c-3.866 0-7-3.134-7-7V2h4zm10 13H8v5h8v-5zm3-10h-1.5C15.015 5 13 7.015 13 9.5v.5h1.5c2.485 0 4.5-2.015 4.5-4.5V5zM6 4H4c0 2.761 2.239 5 5 5h2c0-2.761-2.239-5-5-5z">
+                            </path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="grid mt-12 grid-cols-2 gap-8 m-4 max-[900px]:grid-cols-1">
+                <div class="bg-white rounded-2xl">
+                    <div class="flex flex-row justify-between items-center border-b-[1px] border-[#f0f0f0] p-4">
+                        <h3 class="text-xl font-semibold">Reccent Projects</h3>
+                        <button class="bg-[#04d908] rounded-lg py-2 px-4 font-medium text-white">See all<span
+                                class="las la-arrow-right ml-1"></span></button>
+                    </div>
+                    <table class="w-full border-collapse overflow-x-auto">
+                        <thead>
+                            <tr class="border-t-[1px] border-b-[1px] border-[#f0f0f0] font-semibold ">
+                                <td class="pt-2 pb-2 pl-4 pr-4 text-[#222];">Project Name</td>
+                                <td class="pt-2 pb-2 pl-4 pr-4 text-[#222];">Project id</td>
+                                <td class="pt-2 pb-2 pl-4 pr-4 text-[#222];">Location</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in proj %}
+                            <tr>
+                                <td class="pt-2 pb-2 pl-4 pr-4 text-[#222];">{{p.name}}</td>
+                                <td class="pt-2 pb-2 pl-4 pr-4 text-[#222];">{{p.reg}}</td>
+                                <td class="pt-2 pb-2 pl-4 pr-4 text-[#222];">
+                                    {{p.long}},{{p.lat}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-white rounded-2xl">
+                    <div class="flex flex-row justify-between items-center border-b-[1px] border-[#f0f0f0] p-4">
+                        <h3 class="text-xl font-semibold">Recent Volunteers</h3>
+                        <button class="bg-[#04d908] rounded-lg py-2 px-4 font-medium text-white">See all<span
+                                class="las la-arrow-right ml-1"></span></button>
+                    </div>
+
+                    {% for u in user %}
+                    <div>
+                        <div class="flex h-full flex-col pt-2 pb-2 pl-4 pr-4">
+                            <div class="flex flex-row justify-between mb-2">
+                                <div class="flex flex-row items-center ">
+                                    <img src="user.jpeg" alt="" class="w-11 h-11 rounded-full">
+                                    <div class="ml-4">
+                                        <h4 class="text-[#222] font-semibold text-[17px] ">{{u.username}}</h4>
+                                        <small class="text-[#8390A2] font-medium">Delhi</small>
+                                    </div>
+                                </div>
+
+                                <div class="contact text-[#04d908] flex justify-center items-center mr-2 text-2xl">
+                                    <span class="las la-user-circle ml-2"></span>
+                                    <span class="las la-comment ml-2"></span>
+                                    <span class="las la-phone ml-2"></span>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+        {% endblock %}

@@ -118,7 +118,7 @@
 
 {% endblock  %}
 
-
+<div class="h-screen flex items-center justify-center">
 {% block content %}
 <form method="POST">
     {% csrf_token %}
@@ -179,5 +179,6 @@
         </button>
     </div>
 </form>
+</div>
 
 {% endblock  %}

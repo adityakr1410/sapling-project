@@ -1,151 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        
-:root{
-    --main-color:#04d908;
-    --color-dark:#1D2231;
-    --color-grey:#8390A2;
-}
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style-type: none;
-    text-decoration: none;
-    /* font-family: 'Poppins',sans-serif; */
-}
-
-body{
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    align-items: center;
-    background-color:  #f1f5f9;
-}
-.card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    width: 400px;
-    height: 500px;
-    padding: 2em 1em;
-    border-radius: 20px;
-    box-shadow: 0.5px 4px 9px 1px var(--color-grey);
-    justify-content: space-between;
-}
-.tag{
-   font-size: 26px;
-    font-weight: 700;
-    color: var(--color-dark);
-
-}
-h4{
-    color: var(--color-dark);
-    font-weight: 600;
-    font-size: 16px;
-}
+{% extends 'base.html' %}
 
 
-
-.text{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-   
-}
-
-.register{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-}
-.reg{
-    margin-left:5px ;
-}
-
-.signIn{
-    width: 100%;
-    padding: 0.3rem 0.3rem;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    background-color:var(--main-color) ;
-    color: #fff;
-}
-.signIn:hover{
-    background-color:#51e954 ;
-    color: #eefaeb;
-}
-
-h4 a{
-    color: var(--main-color);
-}
-h4 a:hover{
-    color:#51e954  ;
-}
-.email , .password{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
+{% load static %}
 
 
-.email-box , .password-box{
-    border: 0.5px solid var(--color-grey);
-    padding: .35rem;
-    border-radius: 5px;
-}
-
-input:focus{
-    outline: none !important;
-    border: 2px solid var(--main-color);
-    padding: 0.32rem;
-}
-    </style>
-
-</head>
-<body>
-    <form method='post'>
-        {% csrf_token %}
-        <div class="card">
+    {% block content %}
+    
+<form method="POST">
+    {% csrf_token %}
+    <div class="flex justify-center h-screen items-center bg-[#f1f5f9]">
+        <div
+            class="flex flex-col items-center justify-between bg-white w-[400px] h-[500px] py-[2em] px-[1em] rounded-[20px] shadow-[#8390A2] shadow-lg max-sm:w-3/5 max-sm:h-3/5">
             <div class="logo">
-                <img src="mySite\users\templates\logo.png" alt="logo" width="80px" height="70px">
+                <img src={% static 'logo.png' %} alt="logo" class="w-20 h-16 max-sm:w-14 max-sm:h-12">
             </div>
-            <h2 class="tag" >Sign in to your account </h2>
-            <div class="email">
-                <h4>Username</h4>
-                {{form.username}}
-            </div>
-            <div class="password">
-                <div class="text">
-                    <h4>Password</h4>
-                    <h4><a href="#forgotPassword">Forgot password?</a></h4>
+            <h2 class="text-[26px] font-bold text-[#1D2231] max-sm:text-[20px] text-center ">Sign in to your account
+            </h2>
+            <div class="w-full flex flex-col">
+                <h4 class="text-[#1D2231] text-[16px] max-sm:text-[14px] font-normal">Email address</h4>
+                <div type="text"
+                    class="border-[0.5px] border-[#8390A2] rounded-[5px] p-[0.35rem] focus:outline-none focus:border-[2px] focus:border-[#04d908] focus:p-[0.32rem]">
+                    {{form.username}}
                 </div>
-                {{form.password}}
             </div>
-             
-            <div class="button">
-                <button type="submit">
-                    Login
-                </button>
+            <div class="w-full flex flex-col">
+                <div class="flex flex-row justify-between">
+                    <h4 class="text-[#1D2231] text-[16px] max-sm:text-[14px] font-normal">Password</h4>
+                    <h4 class="text-[#04d908] text-[16px] max-sm:text-[14px] font-normal hover:text-[#51e954]">
+                        <a  href="#forgotPassword">Forgot
+                            password?
+                        </a>
+                    </h4>
+                </div>
+                <div type="password"
+                    class="border-[0.5px] border-[#8390A2] rounded-[5px] p-[0.35rem] focus:outline-none focus:border-[2px] focus:border-[#04d908] focus:p-[0.32rem]">
+
+                    {{form.password}}
+                </div>
             </div>
-            <div class="register">
-                <h4>don't have an account?</h4>
-                <h4 class="reg"><a href={% url 'register' %}> Register</a></h4>
+
+            <button
+                class="w-full p-[0.3rem] rounded-[5px] text-[16px] font-semibold text-white bg-[#04d908] hover:bg-[#51e954] hover:text-[#eefaeb]"
+                type="submit">
+                Sign in
+            </button>
+            <div class="flex flex-row w-full justify-center">
+                <h4 class="text-[#1D2231] text-[16px] max-sm:text-[14px] font-normal">don't have an account?</h4>
+                <h4 class="ml-2 text-[#04d908] text-[16px] max-sm:text-[14px] font-normal hover:text-[#51e954]"><a
+                        href={% url 'register' %}>
+                        Register</a></h4>
             </div>
-            
+
         </div>
-    </form>
-</body>
-</html>
+    </div>
+</form>
+
+
+    {% endblock content %}

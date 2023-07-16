@@ -10,5 +10,6 @@ urlpatterns = [
    path('allProject/',allProjects,name='allProject'),
    path('viewProject/<int:id>/',viewProject,name='viewProject'),
    path('addPlant/',addPlant,name='addPlant'),
+   path('dashboard/',viewDashboard,name='viewDashboard'),
    
 ]
